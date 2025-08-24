@@ -7,6 +7,7 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/onboarding_screen.dart';
 import 'widgets/auth_wrapper.dart';
+import 'widgets/auth_wrapper_simple.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/onboarding': (context) => const OnboardingScreen(),
-        '/app': (context) => const AuthWrapper(),
+        '/app': (context) => const AuthWrapperSimple(), // Temporary: using simple wrapper for login troubleshooting
       },
       
       // Handle unknown routes

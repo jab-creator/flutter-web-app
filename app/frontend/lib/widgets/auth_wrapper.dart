@@ -5,6 +5,7 @@ import '../screens/onboarding_screen.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../models/user_model.dart';
+import '../models/child_model.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
@@ -29,7 +30,7 @@ class AuthWrapper extends StatelessWidget {
 
         if (user.isNotEmpty) {
           // Check if user needs onboarding (no children created yet)
-          return FutureBuilder<List<dynamic>>(
+          return FutureBuilder<List<Child>>(
             future: firestoreService.getChildrenForUser(user.id),
             builder: (context, childrenSnapshot) {
               if (childrenSnapshot.connectionState == ConnectionState.waiting) {
@@ -38,6 +39,12 @@ class AuthWrapper extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                 );
+              }
+
+              // Handle errors gracefully - if there's an error, assume no children and show onboarding
+              if (childrenSnapshot.hasError) {
+                print('Error fetching children: ${childrenSnapshot.error}');
+                return const OnboardingScreen();
               }
 
               final children = childrenSnapshot.data ?? [];
