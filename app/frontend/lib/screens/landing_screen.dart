@@ -7,7 +7,7 @@ import '../widgets/footer.dart';
 import '../utils/responsive_helper.dart';
 
 /// Main landing screen for the RESP Gift Platform.
-/// 
+///
 /// Combines all landing page sections in a responsive layout
 /// that provides an engaging first impression for visitors.
 class LandingScreen extends StatefulWidget {
@@ -113,25 +113,25 @@ class _LandingScreenState extends State<LandingScreen> {
             onGetStarted: _handleGetStarted,
             onLearnMore: () => _scrollToSection('features'),
           ),
-          
+
           // Features Section
           _buildSection(
             key: 'features',
             child: const FeaturesSection(),
           ),
-          
+
           // How It Works Section
           _buildSection(
             key: 'how-it-works',
             child: const HowItWorksSection(),
           ),
-          
+
           // CTA Section
           CtaSection(
             onGetStarted: _handleGetStarted,
             onLearnMore: () => _scrollToSection('features'),
           ),
-          
+
           // Footer
           Footer(
             onPrivacyPolicy: _handlePrivacyPolicy,
@@ -154,20 +154,17 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   Widget? _buildScrollToTopButton(BuildContext context) {
-    return ValueListenableBuilder<ScrollController>(
-      valueListenable: _scrollController,
-      builder: (context, controller, child) {
-        final showButton = controller.hasClients && controller.offset > 500;
-        
-        if (!showButton) return null;
-        
-        return FloatingActionButton(
-          onPressed: _scrollToTop,
-          mini: true,
-          tooltip: 'Scroll to top',
-          child: const Icon(Icons.keyboard_arrow_up),
-        );
-      },
+    // Show button if scrolled more than 500 pixels
+    final showButton =
+        _scrollController.hasClients && _scrollController.offset > 500;
+
+    if (!showButton) return null;
+
+    return FloatingActionButton(
+      onPressed: _scrollToTop,
+      mini: true,
+      tooltip: 'Scroll to top',
+      child: const Icon(Icons.keyboard_arrow_up),
     );
   }
 
@@ -342,18 +339,18 @@ class CompactLandingScreen extends StatelessWidget {
                 _showFeaturesBottomSheet(context);
               },
             ),
-            
+
             // Compact Features
             const CompactFeaturesSection(),
-            
+
             // Simple How It Works
             const SimpleHowItWorksSection(),
-            
+
             // Compact CTA
             CompactCtaSection(
               onGetStarted: () => Navigator.of(context).pushNamed('/signup'),
             ),
-            
+
             // Minimal Footer
             const MinimalFooter(),
           ],

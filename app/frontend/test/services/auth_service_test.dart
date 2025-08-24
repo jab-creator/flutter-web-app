@@ -260,12 +260,15 @@ void main() {
     test('creates correct message for known error codes', () {
       const testCases = {
         'invalid-email': 'Email is not valid or badly formatted.',
-        'user-disabled': 'This user has been disabled. Please contact support for help.',
+        'user-disabled':
+            'This user has been disabled. Please contact support for help.',
         'email-already-in-use': 'An account already exists for that email.',
-        'operation-not-allowed': 'Operation is not allowed. Please contact support.',
+        'operation-not-allowed':
+            'Operation is not allowed. Please contact support.',
         'weak-password': 'Please enter a stronger password.',
         'too-many-requests': 'Too many requests. Try again later.',
-        'network-request-failed': 'Network error occurred. Please check your connection.',
+        'network-request-failed':
+            'Network error occurred. Please check your connection.',
       };
 
       for (final entry in testCases.entries) {
@@ -275,7 +278,8 @@ void main() {
     });
 
     test('creates default message for unknown error code', () {
-      const failure = SignUpWithEmailAndPasswordFailure.fromCode('unknown-error');
+      final failure =
+          SignUpWithEmailAndPasswordFailure.fromCode('unknown-error');
       expect(failure.message, equals('An unknown exception occurred.'));
     });
   });
@@ -284,12 +288,15 @@ void main() {
     test('creates correct message for known error codes', () {
       const testCases = {
         'invalid-email': 'Email is not valid or badly formatted.',
-        'user-disabled': 'This user has been disabled. Please contact support for help.',
+        'user-disabled':
+            'This user has been disabled. Please contact support for help.',
         'user-not-found': 'Email is not found, please create an account.',
         'wrong-password': 'Incorrect password, please try again.',
-        'invalid-credential': 'The credential received is malformed or has expired.',
+        'invalid-credential':
+            'The credential received is malformed or has expired.',
         'too-many-requests': 'Too many requests. Try again later.',
-        'network-request-failed': 'Network error occurred. Please check your connection.',
+        'network-request-failed':
+            'Network error occurred. Please check your connection.',
       };
 
       for (final entry in testCases.entries) {
@@ -299,7 +306,8 @@ void main() {
     });
 
     test('creates default message for unknown error code', () {
-      const failure = LogInWithEmailAndPasswordFailure.fromCode('unknown-error');
+      final failure =
+          LogInWithEmailAndPasswordFailure.fromCode('unknown-error');
       expect(failure.message, equals('An unknown exception occurred.'));
     });
   });

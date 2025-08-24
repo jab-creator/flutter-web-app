@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class AppTheme {
   // Brand colors for RESP Gift Platform
   static const Color _primaryColor = Color(0xFF1976D2); // Blue
-  static const Color _secondaryColor = Color(0xFF4CAF50); // Green (for money/growth)
-  static const Color _tertiaryColor = Color(0xFFFF9800); // Orange (for warmth/family)
-  
+  static const Color _secondaryColor =
+      Color(0xFF4CAF50); // Green (for money/growth)
+  static const Color _tertiaryColor =
+      Color(0xFFFF9800); // Orange (for warmth/family)
+
   // Surface colors
   static const Color _surfaceColor = Color(0xFFFAFAFA);
   static const Color _backgroundColor = Color(0xFFFFFFFF);
-  
+
   // Text colors
   static const Color _onSurfaceColor = Color(0xFF1C1B1F);
   static const Color _onSurfaceVariantColor = Color(0xFF49454F);
@@ -32,10 +34,10 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      
+
       // Typography
       textTheme: _buildTextTheme(colorScheme),
-      
+
       // App Bar
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
@@ -49,7 +51,7 @@ class AppTheme {
           color: colorScheme.onSurface,
         ),
       ),
-      
+
       // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -66,7 +68,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Outlined Button
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
@@ -82,7 +84,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Text Button
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -94,16 +96,16 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Card
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         color: colorScheme.surface,
       ),
-      
+
       // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -124,9 +126,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: colorScheme.error),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
-      
+
       // Divider
       dividerTheme: DividerThemeData(
         color: colorScheme.outline.withOpacity(0.2),
@@ -150,7 +153,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: _buildTextTheme(colorScheme),
-      
+
       // Similar theme configurations as light theme but adapted for dark mode
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
@@ -164,7 +167,7 @@ class AppTheme {
           color: colorScheme.onSurface,
         ),
       ),
-      
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colorScheme.primary,
@@ -180,8 +183,8 @@ class AppTheme {
           ),
         ),
       ),
-      
-      cardTheme: CardTheme(
+
+      cardTheme: CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -213,7 +216,7 @@ class AppTheme {
         letterSpacing: 0,
         color: colorScheme.onSurface,
       ),
-      
+
       // Headline styles
       headlineLarge: TextStyle(
         fontSize: 32,
@@ -233,7 +236,7 @@ class AppTheme {
         letterSpacing: 0,
         color: colorScheme.onSurface,
       ),
-      
+
       // Title styles
       titleLarge: TextStyle(
         fontSize: 22,
@@ -253,7 +256,7 @@ class AppTheme {
         letterSpacing: 0.1,
         color: colorScheme.onSurface,
       ),
-      
+
       // Body styles
       bodyLarge: TextStyle(
         fontSize: 16,
@@ -273,7 +276,7 @@ class AppTheme {
         letterSpacing: 0.4,
         color: colorScheme.onSurfaceVariant,
       ),
-      
+
       // Label styles
       labelLarge: TextStyle(
         fontSize: 14,
@@ -310,7 +313,7 @@ extension AppThemeExtension on ThemeData {
   double get spacing40 => 40.0;
   double get spacing48 => 48.0;
   double get spacing64 => 64.0;
-  
+
   /// Get border radius values
   double get radiusSmall => 8.0;
   double get radiusMedium => 12.0;
