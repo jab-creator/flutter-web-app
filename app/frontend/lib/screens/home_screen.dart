@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import '../pages/home_page.dart';
 import '../pages/tasks_page.dart';
 import '../pages/about_page.dart';
+import '../models/user_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String currentUser;
+  final User user;
   final VoidCallback onLogout;
 
   const HomeScreen({
     super.key,
-    required this.currentUser,
+    required this.user,
     required this.onLogout,
   });
 
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      HomePage(currentUser: widget.currentUser),
+      HomePage(user: widget.user),
       const TasksPage(),
       const AboutPage(),
     ];
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Flutter Web App'),
+        title: const Text('RESP Gift Platform'),
         elevation: 2,
         actions: [
           Padding(
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icon(Icons.person, color: Colors.grey.shade700),
                 const SizedBox(width: 4),
                 Text(
-                  widget.currentUser,
+                  widget.user.displayName ?? widget.user.email,
                   style: TextStyle(color: Colors.grey.shade700),
                 ),
                 const SizedBox(width: 8),

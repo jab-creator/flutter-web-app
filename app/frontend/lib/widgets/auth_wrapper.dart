@@ -2,55 +2,50 @@ import 'package:flutter/material.dart';
 import '../screens/login_screen.dart';
 import '../screens/home_screen.dart';
 import '../services/auth_service.dart';
+import '../models/user_model.dart';
 
-class AuthWrapper extends StatefulWidget {
+class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
 
   @override
-  State<AuthWrapper> createState() => _AuthWrapperState();
-}
-
-class _AuthWrapperState extends State<AuthWrapper> {
-  bool _isLoggedIn = false;
-  String _currentUser = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _checkAuthStatus();
-  }
-
-  void _checkAuthStatus() {
-    setState(() {
-      _isLoggedIn = AuthService.isLoggedIn;
-      _currentUser = AuthService.currentUser;
-    });
-  }
-
-  void _login(String username) {
-    setState(() {
-      _isLoggedIn = true;
-      _currentUser = username;
-    });
-  }
-
-  void _logout() {
-    AuthService.logout();
-    setState(() {
-      _isLoggedIn = false;
-      _currentUser = '';
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (_isLoggedIn) {
-      return HomeScreen(
-        currentUser: _currentUser,
-        onLogout: _logout,
-      );
-    } else {
-      return LoginScreen(onLogin: _login);
-    }
+    final authService = AuthService();
+    
+    return StreamBuilder<User>(
+      stream: authService.user,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+
+        final user = snapshot.data ?? User.empty;
+
+        if (user.isNotEmpty) {
+          return HomeScreen(
+            user: user,
+            onLogout: () async {
+              try {
+                await authService.logOut();
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Error signing out. Please try again.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              }
+            },
+          );
+        } else {
+          return const LoginScreen();
+        }
+      },
+    );
   }
 }
