@@ -1,0 +1,25 @@
+{
+  "functions": {
+    "source": "app/backend/functions",
+    "runtime": "nodejs20"
+  },
+  "hosting": {
+    "source": "app/frontend/build/web",
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "rewrites": [
+      { "source": "/api/payments/checkout", "function": "paymentsCheckout" },
+      { "source": "/api/public/childBySlug", "function": "publicChildBySlug" },
+      { "source": "/webhooks/stripe", "function": "stripeWebhook" },
+      { "source": "**", "destination": "/index.html" }
+    ]
+  },
+  "firestore": {
+    "rules": "app/backend/firestore.rules",
+    "indexes": "app/backend/firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "app/backend/storage.rules"
+  }
+}
