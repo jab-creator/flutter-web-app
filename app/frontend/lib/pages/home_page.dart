@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import '../models/user_model.dart';
 
 class HomePage extends StatelessWidget {
-  final String currentUser;
+  final User user;
 
-  const HomePage({super.key, required this.currentUser});
+  const HomePage({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
+    final displayName = user.displayName ?? user.email.split('@').first;
+    
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Welcome back, $currentUser!',
+            'Welcome back, $displayName!',
             style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           const Text(
-            'Flutter Web App Dashboard',
+            'RESP Gift Platform Dashboard',
             style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
           const SizedBox(height: 20),
@@ -29,12 +32,12 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'App Features',
+                    'Platform Features',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'This Flutter web app demonstrates modern web development with Flutter.',
+                    'Manage your child\'s education savings with our comprehensive RESP gift platform.',
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 20),
@@ -42,12 +45,12 @@ class HomePage extends StatelessWidget {
                     spacing: 10,
                     runSpacing: 10,
                     children: [
+                      _buildFeatureChip('Gift Collection', Icons.card_giftcard),
+                      _buildFeatureChip('RESP Management', Icons.savings),
+                      _buildFeatureChip('Firebase Auth', Icons.security),
+                      _buildFeatureChip('Real-time Updates', Icons.sync),
                       _buildFeatureChip('Responsive Design', Icons.devices),
                       _buildFeatureChip('Material Design 3', Icons.palette),
-                      _buildFeatureChip('Authentication', Icons.security),
-                      _buildFeatureChip('Task Management', Icons.task_alt),
-                      _buildFeatureChip('Navigation', Icons.navigation),
-                      _buildFeatureChip('State Management', Icons.settings),
                     ],
                   ),
                 ],
@@ -73,27 +76,27 @@ class HomePage extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     _buildInfoCard(
-                      'Tasks',
-                      'Manage your daily tasks',
-                      Icons.task_alt,
+                      'Gift Campaigns',
+                      'Create and manage gift campaigns',
+                      Icons.campaign,
                       Colors.blue,
                     ),
                     _buildInfoCard(
-                      'Profile',
-                      'View your profile info',
-                      Icons.person,
+                      'RESP Account',
+                      'View your RESP account details',
+                      Icons.account_balance,
                       Colors.green,
                     ),
                     _buildInfoCard(
-                      'Settings',
-                      'App configuration',
-                      Icons.settings,
+                      'Contributors',
+                      'Manage gift contributors',
+                      Icons.people,
                       Colors.orange,
                     ),
                     _buildInfoCard(
-                      'About',
-                      'Learn about Flutter',
-                      Icons.info,
+                      'Reports',
+                      'View savings reports',
+                      Icons.analytics,
                       Colors.purple,
                     ),
                   ],

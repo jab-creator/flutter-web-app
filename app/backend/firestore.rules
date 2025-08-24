@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+
+    match /users/{userId} {
+      allow read, update: if isOwner(userId);
+      allow create: if isOwner(userId);
+    }
+
+    match /children/{childId} {
+      allow read, write: if isSignedIn() && isOwner(resource.data.userId);
+      allow create: if isSignedIn() && isOwner(request.resource.data.userId);
+    }
+
+    match /giftPages/{pageId} {
+      allow get: if resource.data.isPublic == true
+                 || (isSignedIn() && isOwner(get(/databases/$(database)/documents/children/$(resource.data.childId)).data.userId));
+      allow list: if false;
+      allow create, update, delete: if isSignedIn()
+        && isOwner(get(/databases/$(database)/documents/children/$(request.resource.data.childId)).data.userId);
+    }
+
+    match /gifts/{giftId} {
+      // readable only by the parent (owner)
+      allow get, list: if isSignedIn()
+        && isOwner(get(/databases/$(database)/documents/children/$(resource.data.childId)).data.userId);
+      // all writes go through Functions
+      allow create, update, delete: if false;
+    }
+
+    match /slugIndex/{slug} {
+      allow get: if true;  // used for public resolves
+      allow create, update, delete: if false; // set via admin SDK (Function) if needed
+    }
+  }
+}
