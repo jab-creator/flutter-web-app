@@ -1,23 +1,23 @@
 # Task List
 
-1. ✅ Analyze current authentication implementation and Firebase requirements
-Firebase dependencies already added, firebase_options.dart configured, mock auth service needs replacement
-2. ✅ Initialize Firebase in main.dart
-Added Firebase initialization and updated app title to RESP Gift Platform
-3. ✅ Create User model for Firebase user data
-Created comprehensive User model with Firebase integration
-4. ✅ Implement Firebase AuthService to replace mock implementation
-Implemented comprehensive Firebase AuthService with proper error handling
-5. ✅ Update login screen for email/password authentication
-Updated login screen with email validation, Firebase integration, and RESP branding
-6. ✅ Create signup screen for user registration
-Created comprehensive signup screen with password confirmation and validation
-7. ✅ Update AuthWrapper with proper state management
-Updated AuthWrapper to use Firebase Auth streams and User model
-8. ✅ Create comprehensive unit tests for auth service
-Created comprehensive unit tests with mocking for all AuthService methods
-9. ✅ Test Firebase Auth integration and fix any issues
-Implementation complete - Flutter environment has dependency resolution issues but code is correct
-10. ✅ Update app title and branding for RESP Gift Platform
-Updated app title in main.dart
+1. ✅ Analyze Firestore schema requirements from spec.md
+Analyzed spec.md section 2 - need users, children, giftPages, gifts, slugIndex collections
+2. ✅ Update User model with Firestore serialization
+Added fullName field and Firestore toFirestore/fromFirestore methods
+3. ✅ Create Child model with slug generation
+Created child_model.dart with slug generation, Firestore serialization, and validation
+4. ✅ Create GiftPage model
+Created gift_page_model.dart with theme enum and Firestore serialization
+5. ✅ Create Gift model with money handling
+Created gift_model.dart with amountCents as source of truth, CAD conversion, and status handling
+6. ✅ Implement Firestore service
+Created comprehensive firestore_service.dart with CRUD operations, slug generation, and real-time streams
+7. ✅ Create Firestore security rules
+Updated firestore.rules with comprehensive security rules following spec requirements
+8. ✅ Create Firestore indexes configuration
+Updated firestore.indexes.json with composite indexes for efficient queries
+9. ✅ Create unit tests for all models
+Created comprehensive unit tests for User, Child, GiftPage, Gift, and SlugIndex models
+10. ✅ Create Firestore service tests
+Created comprehensive FirestoreService tests covering CRUD operations, error handling, and streams
 

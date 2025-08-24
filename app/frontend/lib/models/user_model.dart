@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User extends Equatable {
   const User({
     required this.id,
     required this.email,
+    this.fullName,
     this.displayName,
     this.photoURL,
     this.emailVerified = false,
@@ -17,6 +19,9 @@ class User extends Equatable {
 
   /// The current user's email address.
   final String email;
+
+  /// The current user's full name (for Firestore).
+  final String? fullName;
 
   /// The current user's display name (optional).
   final String? displayName;
@@ -47,6 +52,7 @@ class User extends Equatable {
     return User(
       id: firebaseUser.uid,
       email: firebaseUser.email ?? '',
+      fullName: firebaseUser.displayName,
       displayName: firebaseUser.displayName,
       photoURL: firebaseUser.photoURL,
       emailVerified: firebaseUser.emailVerified,
@@ -55,10 +61,32 @@ class User extends Equatable {
     );
   }
 
+  /// Creates a [User] from Firestore document data.
+  factory User.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data()!;
+    return User(
+      id: doc.id,
+      email: data['email'] as String,
+      fullName: data['fullName'] as String?,
+      displayName: data['fullName'] as String?,
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
+    );
+  }
+
+  /// Converts the [User] to a Firestore document.
+  Map<String, dynamic> toFirestore() {
+    return {
+      'email': email,
+      'fullName': fullName ?? displayName ?? '',
+      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : FieldValue.serverTimestamp(),
+    };
+  }
+
   /// Creates a copy of the current [User] with property changes.
   User copyWith({
     String? id,
     String? email,
+    String? fullName,
     String? displayName,
     String? photoURL,
     bool? emailVerified,
@@ -68,6 +96,7 @@ class User extends Equatable {
     return User(
       id: id ?? this.id,
       email: email ?? this.email,
+      fullName: fullName ?? this.fullName,
       displayName: displayName ?? this.displayName,
       photoURL: photoURL ?? this.photoURL,
       emailVerified: emailVerified ?? this.emailVerified,
@@ -80,6 +109,7 @@ class User extends Equatable {
   List<Object?> get props => [
         id,
         email,
+        fullName,
         displayName,
         photoURL,
         emailVerified,
