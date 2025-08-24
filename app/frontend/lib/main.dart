@@ -5,6 +5,7 @@ import 'theme/app_theme.dart';
 import 'screens/landing_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
+import 'screens/onboarding_screen.dart';
 import 'widgets/auth_wrapper.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
+        '/onboarding': (context) => const OnboardingScreen(),
         '/app': (context) => const AuthWrapper(),
       },
       
