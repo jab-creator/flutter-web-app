@@ -37,7 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               backgroundColor: Colors.green,
             ),
           );
-          Navigator.of(context).pop();
+          // Navigate to app after successful signup
+          Navigator.of(context).pushReplacementNamed('/app');
         }
       } on SignUpWithEmailAndPasswordFailure catch (e) {
         if (mounted) {

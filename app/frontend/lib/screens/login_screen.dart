@@ -28,6 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
+        
+        // Navigate to app after successful login
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/app');
+        }
       } on LogInWithEmailAndPasswordFailure catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(

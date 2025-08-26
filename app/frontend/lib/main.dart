@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/onboarding': (context) => const OnboardingScreen(),
-        '/app': (context) => const AuthWrapperSimple(), // Temporary: using simple wrapper for login troubleshooting
+        '/app': (context) => const AuthWrapper(),
       },
       
       // Handle unknown routes
